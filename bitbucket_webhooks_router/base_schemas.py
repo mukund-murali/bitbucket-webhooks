@@ -1,22 +1,28 @@
 """Holds Marshmallow schemas."""
 from marshmallow import Schema, fields
+from marshmallow import EXCLUDE
 
 
 class User(Schema):
     """
     https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-entity_user
     """
+    class Meta:
+        unknown = EXCLUDE
+
     type = fields.String()
     username = fields.String()
     nickname = fields.String()
     display_name = fields.String()
     uuid = fields.String()
-    links = fields.List()
 
 
 class Project(Schema):
     """
     """
+    class Meta:
+        unknown = EXCLUDE
+
     name = fields.String()
     uuid = fields.String()
     key = fields.String()
@@ -25,6 +31,9 @@ class Project(Schema):
 class Repository(Schema):
     """
     """
+    class Meta:
+        unknown = EXCLUDE
+
     name = fields.String()
     full_name = fields.String()
     website = fields.String()
@@ -37,6 +46,9 @@ class Repository(Schema):
 class PullRequest(Schema):
     """
     """
+    class Meta:
+        unknown = EXCLUDE
+
     id = fields.Int()
     title = fields.String()
     description = fields.String()
