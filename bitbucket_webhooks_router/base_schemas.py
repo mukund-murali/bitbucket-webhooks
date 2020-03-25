@@ -36,7 +36,7 @@ class Repository(Schema):
 
     name = fields.String()
     full_name = fields.String()
-    website = fields.String()
+    website = fields.String(allow_none=True)
     uuid = fields.String()
     owner = fields.Nested(User)
     project = fields.Nested(Project)
