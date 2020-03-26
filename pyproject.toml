@@ -1,0 +1,7 @@
+[took.black]
+line-length=99
+
+[tool.isort]
+from_first=true
+force_single_line=true
+line_length=99
