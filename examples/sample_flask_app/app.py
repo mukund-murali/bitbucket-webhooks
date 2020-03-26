@@ -14,16 +14,16 @@ HEADER_EVENT_KEY = 'X-Event-Key'
 def hello_world():
     event_key = request.headers.get(HEADER_EVENT_KEY)
     router.route(event_key, request.json)
-    return 'Hello, World!'
+    return ('', 204)
 
 
 @decorators.handle_repo_push
 def push_handler_1(event):
-    print("Handler 1")
-    print(event["repository"]["name"])
+    print("Repo push handler 1")
+    print(event.repository.name)
 
 
 @decorators.handle_repo_push
 def push_handler_2(event):
-    print("Handler 2")
-    print(event["repository"]["name"])
+    print("Repo push handler 2")
+    print(event.repository.name)

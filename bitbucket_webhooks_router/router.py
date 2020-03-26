@@ -17,4 +17,4 @@ def route(event_key: str, event_payload: dict) -> None:
         return
     event = handler.schema().load(event_payload)
     for method in handler.decorator.methods:
-        method(push_event)
+        method(event)

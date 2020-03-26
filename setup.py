@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 from os import path
 
 here = path.abspath(path.dirname(__file__))
@@ -23,8 +23,7 @@ setup(
         'Programming Language :: Python :: 3',
     ],
     keywords='bitbucket webhooks development',  
-    package_dir={'': 'bitbucket_webhooks_router'},  
-    packages=find_packages(where='bitbucket_webhooks_router'),  
+    packages=find_namespace_packages(include=["bitbucket_webhooks_router.*"]),
     python_requires='>=3.5',
     install_requires=['marshmallow-objects', 'marshmallow'],  
     extras_require={},
