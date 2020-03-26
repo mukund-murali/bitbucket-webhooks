@@ -5,6 +5,7 @@ class User(mm.Model):
     """
     https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-entity_user
     """
+
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -18,6 +19,7 @@ class User(mm.Model):
 class Project(mm.Model):
     """
     """
+
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -29,6 +31,7 @@ class Project(mm.Model):
 class Repository(mm.Model):
     """
     """
+
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -44,6 +47,7 @@ class Repository(mm.Model):
 class PullRequest(mm.Model):
     """
     """
+
     class Meta:
         unknown = mm.EXCLUDE
 
