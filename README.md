@@ -1,3 +1,3 @@
 # bitbucket-webhooks-router
-
-Library that helps handle bitbucket webhooks.
+ 
+Routes bitbucket webhook API event payloads to easily consumable decorators.
