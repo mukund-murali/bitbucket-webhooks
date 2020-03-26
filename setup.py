@@ -28,7 +28,7 @@ setup(
     packages=find_namespace_packages(include=["bitbucket_webhooks_router.*"]),
     python_requires=">=3.5",
     install_requires=["marshmallow-objects", "marshmallow"],
-    extras_require={"dev": ["pytest", "black", "isort", "flake8"]},
+    extras_require={"dev": ["pytest", "black", "isort", "flake8", "mypy"]},
     project_urls={
         "Bug Reports": "https://github.com/mukund-murali/bitbucket-webhooks-router/issues",
         "Source": "https://github.com/mukund-murali/bitbucket-webhooks-router",
