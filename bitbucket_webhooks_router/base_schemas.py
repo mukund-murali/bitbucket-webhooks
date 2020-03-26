@@ -1,4 +1,3 @@
-"""Holds Marshmallow schemas."""
 import marshmallow_objects as mm
 
 
