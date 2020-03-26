@@ -10,3 +10,18 @@ class RepoPush(Schema):
 
     actor = fields.Nested(base_schemas.User)
     repository = fields.Nested(base_schemas.Repository)
+
+
+class PullRequestApproved(Schema):
+    class Meta:
+        unknown = EXCLUDE
+
+    actor = fields.Nested(base_schemas.User)
+    repository = fields.Nested(base_schemas.Repository)
+    pullrequest = fields.Nested(base_schemas.PullRequest)
+    approval = fields.Nested(ApprovalInfo)
+
+
+class ApprovalInfo(Schema):
+    date = fields.DateTime()
+    user = fields.Nested(base_schemas.User)
