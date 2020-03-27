@@ -23,4 +23,4 @@ def test_handlers():
 
     assert len(decorators.handle_pr_approval.methods) == 1
     results = [method(9) for method in decorators.handle_pr_approval.methods]
-    assert results == [13]
+    assert results == [12]
