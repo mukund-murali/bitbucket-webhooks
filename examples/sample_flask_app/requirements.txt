@@ -1,2 +1,2 @@
--e ../../
+bb-hooks-router
 Flask

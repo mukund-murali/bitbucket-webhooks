@@ -30,7 +30,7 @@ def bb_webhooks_handler():
 
 @decorators.handle_repo_push
 def _handle_repo_push(event):
-    print(f"One or more commits push to: {event.repository.name}"
+    print(f"One or more commits pushed to: {event.repository.name}"
 ```
 
 [Here](https://github.com/mukund-murali/bitbucket-webhooks-router/tree/master/examples/sample_flask_app) is the full example.
