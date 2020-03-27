@@ -18,6 +18,7 @@ $ pip install bb-hooks-router
 * pullrequest:created
 * pullrequest:updated
 * pullrequest:approved
+* pullrequest:unapproved
 * pullrequest:fulfilled
 * pullrequest:rejected
 

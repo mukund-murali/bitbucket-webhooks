@@ -19,4 +19,4 @@ def route(event_key: str, event_payload: dict) -> Optional[list]:
     if not handler:
         return None
     event = handler.schema().load(event_payload)
-    return [method(event) for method in handler.decorator.methods]
+    return [method(event) for method in handler.decorator.get_methods()]
