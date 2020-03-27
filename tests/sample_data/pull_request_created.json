@@ -88,7 +88,7 @@
              "uuid":"{6d5ef2c6-b291-431e-8ad1-dc86e348e12a}"
           },
           "branch":{
-             "name":"test-branch"
+             "name":"master"
           }
        },
        "created_on":"2020-03-27T21:11:16.721930+00:00",
@@ -129,7 +129,7 @@
              "uuid":"{6d5ef2c6-b291-431e-8ad1-dc86e348e12a}"
           },
           "branch":{
-             "name":"new-test-branch"
+             "name":"feature-branch"
           }
        },
        "comment_count":0,

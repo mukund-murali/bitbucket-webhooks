@@ -31,6 +31,8 @@ def test_repo_push_router():
 def _pr_created_handler(event):
     assert event.pullrequest.title == "PR title"
     assert event.pullrequest.description == "PR description"
+    assert event.pullrequest.source.branch.name == "feature-branch"
+    assert event.pullrequest.destination.branch.name == "master"
     return "pr_created"
 
 
@@ -46,6 +48,8 @@ def _pr_approved_handler(event):
     assert event.approval.date == datetime.datetime(
         2020, 3, 27, 21, 5, 8, 156574, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000')
     )
+    assert event.pullrequest.closed_by is None
+    assert event.pullrequest.state == "OPEN"
     return "pr_approved"
 
 
@@ -59,6 +63,7 @@ def test_pr_approved_router():
 def _pr_merged_handler(event):
     assert event.pullrequest.state == "MERGED"
     assert event.pullrequest.merge_commit.hash == "19bdde53bbf1"
+    assert event.pullrequest.closed_by.nickname == "mukundvis"
     return "pr_merged"
 
 
