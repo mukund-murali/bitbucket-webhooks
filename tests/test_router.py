@@ -2,7 +2,6 @@ import json
 
 import pytest
 
-from bitbucket_webhooks_router import _exceptions
 from bitbucket_webhooks_router import decorators
 from bitbucket_webhooks_router import router
 
@@ -19,6 +18,13 @@ def test_repo_push_router():
     assert router.route("repo:push", data) == [1]
 
 
-def test_no_handler_error():
-    with pytest.raises(_exceptions.NoHandlerError):
-        router.route("random:event", {})
+def test_no_handler_available():
+    assert router.route("random:event", {}) is None
+
+
+def test_num_handler():
+    assert len(router._HANDLER_MAP) == 7
+
+
+def test_all_different_handlers():
+    pass

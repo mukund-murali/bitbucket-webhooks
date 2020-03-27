@@ -28,6 +28,13 @@ class handle_pr_approved(BaseHandler):
         super(handle_pr_approved, self).__init__(method)
 
 
+class handle_pr_unapproved(BaseHandler):
+    methods: List[Callable] = []
+
+    def __init__(self, method: Callable) -> None:
+        super(handle_pr_unapproved, self).__init__(method)
+
+
 class handle_pr_created(BaseHandler):
     methods: List[Callable] = []
 
