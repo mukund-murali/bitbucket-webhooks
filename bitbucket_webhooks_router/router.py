@@ -1,25 +1,14 @@
-from collections import namedtuple
+from bitbucket_webhooks_router import _exceptions
+from bitbucket_webhooks_router import _handlers
 
-from bitbucket_webhooks_router import _constants
-from bitbucket_webhooks_router import decorators
-from bitbucket_webhooks_router import event_schemas
-
-Handler = namedtuple("Handler", "schema decorator")
-
-HANDLER_MAP = {
-    _constants.EventName.REPO_PUSH.value: Handler(
-        event_schemas.RepoPush, decorators.handle_repo_push
-    ),
-    _constants.EventName.PULL_REQUEST_APPROVED.value: Handler(
-        event_schemas.PullRequestApproved, decorators.handle_pr_approval
-    ),
+_HANDLER_MAP = {
+    handler.event_key: handler for handler in _handlers.EventHandler.__subclasses__()
 }
 
 
-def route(event_key: str, event_payload: dict) -> None:
-    handler = HANDLER_MAP.get(event_key)
+def route(event_key: str, event_payload: dict) -> list:
+    handler = _HANDLER_MAP.get(event_key)
     if not handler:
-        return
+        raise _exceptions.NoHandlerError
     event = handler.schema().load(event_payload)
-    for method in handler.decorator.methods:
-        method(event)
+    return [method(event) for method in handler.decorator.methods]
