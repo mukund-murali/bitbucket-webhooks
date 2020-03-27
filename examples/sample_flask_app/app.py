@@ -27,8 +27,8 @@ def _handle_repo_push_2(event):
     print(f"One or more commits to: {event.repository.name}")
 
 
-@decorators.handle_pr_approval
-def _handle_pr_approval(event):
+@decorators.handle_pr_approved
+def _handle_pr_approved(event):
     print(f"Pull request #{event.pullrequest.id} approved")
 
 
@@ -40,3 +40,13 @@ def _handle_pr_created(event):
 @decorators.handle_pr_updated
 def _handle_pr_updated(event):
     print(f"Pull request #{event.pullrequest.id} updated")
+
+
+@decorators.handle_pr_merged
+def _handle_pr_merged(event):
+    print(f"Pull request #{event.pullrequest.id} merged")
+
+
+@decorators.handle_pr_declined
+def _handle_pr_declined(event):
+    print(f"Pull request #{event.pullrequest.id} declined")

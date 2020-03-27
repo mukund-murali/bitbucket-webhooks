@@ -21,11 +21,11 @@ class handle_repo_push(BaseHandler):
         super(handle_repo_push, self).__init__(method)
 
 
-class handle_pr_approval(BaseHandler):
+class handle_pr_approved(BaseHandler):
     methods: List[Callable] = []
 
     def __init__(self, method: Callable) -> None:
-        super(handle_pr_approval, self).__init__(method)
+        super(handle_pr_approved, self).__init__(method)
 
 
 class handle_pr_created(BaseHandler):
@@ -40,3 +40,17 @@ class handle_pr_updated(BaseHandler):
 
     def __init__(self, method: Callable) -> None:
         super(handle_pr_updated, self).__init__(method)
+
+
+class handle_pr_merged(BaseHandler):
+    methods: List[Callable] = []
+
+    def __init__(self, method: Callable) -> None:
+        super(handle_pr_merged, self).__init__(method)
+
+
+class handle_pr_declined(BaseHandler):
+    methods: List[Callable] = []
+
+    def __init__(self, method: Callable) -> None:
+        super(handle_pr_declined, self).__init__(method)

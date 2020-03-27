@@ -12,6 +12,16 @@ Checkout the [example](https://github.com/mukund-murali/bitbucket-webhooks-route
 $ pip install bb-hooks-router
 ```
 
+## Bitbucket events supported
+
+* repo:push
+* pullrequest:created
+* pullrequest:updated
+* pullrequest:approved
+* pullrequest:fulfilled
+* pullrequest:rejected
+
+
 ## Links
 
 [PyPI](https://pypi.org/project/bb-hooks-router/)

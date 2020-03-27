@@ -33,16 +33,28 @@ class RepoPushHandler(EventHandler):
 class PullRequestApprovedHandler(EventHandler):
     event_key = "pullrequest:approved"
     schema = event_schemas.PullRequestApproved
-    decorator = decorators.handle_pr_approval
+    decorator = decorators.handle_pr_approved
 
 
-class PullRequestCreated(EventHandler):
+class PullRequestCreatedHandler(EventHandler):
     event_key = "pullrequest:created"
     schema = event_schemas.PullRequestCreated
     decorator = decorators.handle_pr_created
 
 
-class PullRequestUpdated(EventHandler):
+class PullRequestUpdatedHandler(EventHandler):
     event_key = "pullrequest:updated"
     schema = event_schemas.PullRequestUpdated
     decorator = decorators.handle_pr_updated
+
+
+class PullRequestMergedHandler(EventHandler):
+    event_key = "pullrequest:fulfilled"
+    schema = event_schemas.PullRequestMerged
+    decorator = decorators.handle_pr_merged
+
+
+class PullRequestDeclinedHandler(EventHandler):
+    event_key = "pullrequest:rejected"
+    schema = event_schemas.PullRequestDeclined
+    decorator = decorators.handle_pr_declined
