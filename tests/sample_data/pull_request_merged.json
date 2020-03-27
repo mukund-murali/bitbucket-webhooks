@@ -191,7 +191,7 @@
     },
     "repository":{
        "scm":"git",
-       "website":"None",
+       "website":null,
        "name":"webhook-test-project",
        "links":{
           "self":{

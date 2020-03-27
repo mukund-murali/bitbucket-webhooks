@@ -15,7 +15,7 @@
           }
        },
        "type":"pullrequest",
-       "description":"",
+       "description":"PR description",
        "links":{
           "decline":{
              "href":"https://api.bitbucket.org/2.0/repositories/mukundvis/webhook-test-project/pullrequests/2/decline"
@@ -51,7 +51,7 @@
              "href":"https://api.bitbucket.org/2.0/repositories/mukundvis/webhook-test-project/pullrequests/2/statuses"
           }
        },
-       "title":"Add test",
+       "title":"PR title",
        "close_source_branch":true,
        "reviewers":[
  
@@ -158,12 +158,12 @@
           "type":"user",
           "account_id":"5a7e9b9912afdf3f200471dd"
        },
-       "merge_commit":"None",
-       "closed_by":"None"
+       "merge_commit":null,
+       "closed_by":null
     },
     "repository":{
        "scm":"git",
-       "website":"None",
+       "website":null,
        "name":"webhook-test-project",
        "links":{
           "self":{
