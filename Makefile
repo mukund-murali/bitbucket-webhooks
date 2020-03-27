@@ -4,3 +4,7 @@ test:
 	mypy bitbucket_webhooks_router
 	flake8 bitbucket_webhooks_router
 	pytest
+
+fmt:
+	isort -rc bitbucket_webhooks_router
+	black bitbucket_webhooks_router
