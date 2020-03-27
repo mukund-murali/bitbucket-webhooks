@@ -2,7 +2,7 @@
  
 [![Build Status](https://travis-ci.com/mukund-murali/bitbucket-webhooks-router.svg?branch=master)](https://travis-ci.com/mukund-murali/bitbucket-webhooks-router)
 
-Routes bitbucket webhook [event payloads](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html) to easily consumable decorators.
+Python library that makes webhook API [event payloads](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html) available via decorators with payload serialized into python objects.
 
 
 ## Installation
