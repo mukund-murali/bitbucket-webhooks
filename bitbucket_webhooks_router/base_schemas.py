@@ -59,7 +59,7 @@ class PullRequest(mm.Model):
     author = mm.NestedModel(User)
     participants = mm.fields.List(mm.NestedModel(User))
     reviewers = mm.fields.List(mm.NestedModel(User))
-    closed_by = mm.NestedModel(User)
+    closed_by = mm.NestedModel(User, allow_none=True)
     reason = mm.fields.String()
     created_on = mm.fields.DateTime()
     updated_on = mm.fields.DateTime()
