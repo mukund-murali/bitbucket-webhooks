@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import pytest
@@ -37,3 +38,18 @@ def test_pr_created_router():
     with open("tests/sample_data/pull_request_created.json") as f:
         data = json.load(f)
     assert router.route("pullrequest:created", data) == ["pr_created"]
+
+
+@decorators.handle_pr_approved
+def _pr_approved_handler(event):
+    assert event.approval.user.display_name == "Mukund Muralikrishnan"
+    assert event.approval.date == datetime.datetime(
+        2020, 3, 27, 21, 5, 8, 156574, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000')
+    )
+    return "pr_approved"
+
+
+def test_pr_approved_router():
+    with open("tests/sample_data/pull_request_approved.json") as f:
+        data = json.load(f)
+    assert router.route("pullrequest:approved", data) == ["pr_approved"]
