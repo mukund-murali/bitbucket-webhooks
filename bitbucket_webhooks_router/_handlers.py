@@ -39,7 +39,7 @@ class PullRequestApprovedHandler(EventHandler):
 class PullRequestUnapprovedHandler(EventHandler):
     event_key = "pullrequest:unapproved"
     schema = event_schemas.PullRequestUnapproved
-    decorator = decorators.handle_pr_approved
+    decorator = decorators.handle_pr_unapproved
 
 
 class PullRequestCreatedHandler(EventHandler):

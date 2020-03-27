@@ -22,7 +22,7 @@ def test_no_handler_available():
     assert router.route("random:event", {}) is None
 
 
-def test_num_handler():
+def test_num_handlers():
     assert len(router._HANDLER_MAP) == 7
 
 

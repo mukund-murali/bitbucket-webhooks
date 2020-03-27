@@ -5,13 +5,10 @@ from flask import request
 
 app = Flask(__name__)
 
-HEADER_EVENT_KEY = "X-Event-Key"
 
-
-@app.route("/hooks", methods=["GET", "POST"])
+@app.route("/hooks", methods=["POST"])
 def bb_webhooks_handler():
-    event_key = request.headers.get(HEADER_EVENT_KEY)
-    router.route(event_key, request.json)
+    router.route(request.headers["X-Event-Key"], request.json)
     return ("", 204)
 
 
@@ -30,6 +27,11 @@ def _handle_repo_push_2(event):
 @decorators.handle_pr_approved
 def _handle_pr_approved(event):
     print(f"Pull request #{event.pullrequest.id} approved")
+
+
+@decorators.handle_pr_unapproved
+def _handle_pr_unapproved(event):
+    print(f"Pull request #{event.pullrequest.id} unapproved")
 
 
 @decorators.handle_pr_created
