@@ -53,3 +53,16 @@ def test_pr_approved_router():
     with open("tests/sample_data/pull_request_approved.json") as f:
         data = json.load(f)
     assert router.route("pullrequest:approved", data) == ["pr_approved"]
+
+
+@decorators.handle_pr_merged
+def _pr_merged_handler(event):
+    assert event.pullrequest.state == "MERGED"
+    assert event.pullrequest.merge_commit.hash == "19bdde53bbf1"
+    return "pr_merged"
+
+
+def test_pr_merged_router():
+    with open("tests/sample_data/pull_request_merged.json") as f:
+        data = json.load(f)
+    assert router.route("pullrequest:fulfilled", data) == ["pr_merged"]

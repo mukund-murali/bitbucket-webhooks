@@ -44,6 +44,29 @@ class Repository(mm.Model):
     is_private = mm.fields.Boolean()
 
 
+class Branch(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    name = mm.fields.String()
+
+
+class Commit(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    hash = mm.fields.String()
+
+
+class ChangeLocation(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    repository = mm.NestedModel(Repository)
+    branch = mm.NestedModel(Branch)
+    commit = mm.NestedModel(Commit)
+
+
 class PullRequest(mm.Model):
     """
     """
@@ -57,6 +80,9 @@ class PullRequest(mm.Model):
     # TODO: Change this to enum.
     state = mm.fields.String()
     author = mm.NestedModel(User)
+    source = mm.NestedModel(ChangeLocation)
+    destination = mm.NestedModel(ChangeLocation)
+    merge_commit = mm.NestedModel(Commit, allow_none=True)
     participants = mm.fields.List(mm.NestedModel(User))
     reviewers = mm.fields.List(mm.NestedModel(User))
     closed_by = mm.NestedModel(User, allow_none=True)
