@@ -2,7 +2,7 @@
  
 [![Build Status](https://travis-ci.com/mukund-murali/bitbucket-webhooks.svg?branch=master)](https://travis-ci.com/mukund-murali/bitbucket-webhooks)
 
-Python library that makes webhook API [event payloads](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html) available via decorators with payload serialized into python objects.
+Python library that makes bitbucket webhook API [event payloads](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html) available via decorators with payload serialized into python objects.
 
 
 ## Installation
@@ -37,7 +37,7 @@ def _handle_repo_push(event: event_schemas.RepoPush):
 [Here](https://github.com/mukund-murali/bitbucket-webhooks/tree/master/examples/sample_flask_app) is the full example.
 
 
-## Bitbucket events supported
+## Webhook events supported
 
 * repo:push
 * pullrequest:created
