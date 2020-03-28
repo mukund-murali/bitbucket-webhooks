@@ -3,8 +3,8 @@ from abc import abstractmethod
 
 import marshmallow_objects as mm
 
-from bitbucket_webhooks_router import decorators
 from bitbucket_webhooks_router import event_schemas
+from bitbucket_webhooks_router import hooks
 
 
 class EventHandler(metaclass=ABCMeta):
@@ -20,47 +20,47 @@ class EventHandler(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def decorator(self) -> decorators.BaseHandler:
+    def decorator(self) -> hooks.BaseHandler:
         raise NotImplementedError
 
 
 class RepoPushHandler(EventHandler):
     event_key = "repo:push"
     schema = event_schemas.RepoPush
-    decorator = decorators.handle_repo_push
+    decorator = hooks.repo_push
 
 
 class PullRequestApprovedHandler(EventHandler):
     event_key = "pullrequest:approved"
     schema = event_schemas.PullRequestApproved
-    decorator = decorators.handle_pr_approved
+    decorator = hooks.pr_approved
 
 
 class PullRequestUnapprovedHandler(EventHandler):
     event_key = "pullrequest:unapproved"
     schema = event_schemas.PullRequestUnapproved
-    decorator = decorators.handle_pr_unapproved
+    decorator = hooks.pr_unapproved
 
 
 class PullRequestCreatedHandler(EventHandler):
     event_key = "pullrequest:created"
     schema = event_schemas.PullRequestCreated
-    decorator = decorators.handle_pr_created
+    decorator = hooks.pr_created
 
 
 class PullRequestUpdatedHandler(EventHandler):
     event_key = "pullrequest:updated"
     schema = event_schemas.PullRequestUpdated
-    decorator = decorators.handle_pr_updated
+    decorator = hooks.pr_updated
 
 
 class PullRequestMergedHandler(EventHandler):
     event_key = "pullrequest:fulfilled"
     schema = event_schemas.PullRequestMerged
-    decorator = decorators.handle_pr_merged
+    decorator = hooks.pr_merged
 
 
 class PullRequestDeclinedHandler(EventHandler):
     event_key = "pullrequest:rejected"
     schema = event_schemas.PullRequestDeclined
-    decorator = decorators.handle_pr_declined
+    decorator = hooks.pr_declined

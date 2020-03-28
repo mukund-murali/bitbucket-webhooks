@@ -14,8 +14,8 @@ $ pip install bb-hooks-router
 ## Quickstart
 
 ```python
-from bitbucket_webhooks_router import decorators
 from bitbucket_webhooks_router import event_schemas
+from bitbucket_webhooks_router import hooks
 from bitbucket_webhooks_router import router
 from flask import Flask
 from flask import request
@@ -29,7 +29,7 @@ def bb_webhooks_handler():
     return ("", 204)
 
 
-@decorators.handle_repo_push
+@hooks.repo_push
 def _handle_repo_push(event: event_schemas.RepoPush):
     print(f"One or more commits pushed to: {event.repository.name}"
 ```
