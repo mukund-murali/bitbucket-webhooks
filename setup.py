@@ -11,15 +11,15 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="bb-hooks-router",
-    version="0.0.5",
-    description="Routes bitbucket webhook API event payloads to easily consumable decorators.",
+    version="0.0.6",
+    description="Routes bitbucket webhook API event payloads to easily consumable decorators with payload serialized to python objects.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/mukund-murali/bitbucket-webhooks-router",
     author="Mukund Muralikrishnan",
     author_email="mukund.muralikrishnan@gmail.com",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
