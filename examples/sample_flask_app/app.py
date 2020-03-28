@@ -1,5 +1,3 @@
-import json
-
 from bitbucket_webhooks_router import event_schemas
 from bitbucket_webhooks_router import hooks
 from bitbucket_webhooks_router import router
@@ -11,7 +9,6 @@ app = Flask(__name__)
 
 @app.route("/hooks", methods=["POST"])
 def bb_webhooks_handler():
-    print(json.dumps(request.json))
     router.route(request.headers["X-Event-Key"], request.json)
     return ("", 204)
 

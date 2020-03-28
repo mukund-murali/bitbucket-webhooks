@@ -46,6 +46,9 @@ def _handle_repo_push(event: event_schemas.RepoPush):
 * pullrequest:unapproved
 * pullrequest:fulfilled
 * pullrequest:rejected
+* pullrequest:comment_created
+* pullrequest:comment_updated
+* pullrequest:comment_deleted
 
 
 ## Links
