@@ -2,7 +2,7 @@ from typing import Optional
 
 from bitbucket_webhooks import hooks
 
-_HANDLER_MAP = {
+_EVENT_HOOK_MAP = {
     "repo:push": hooks.repo_push,
     "pullrequest:approved": hooks.pr_approved,
     "pullrequest:unapproved": hooks.pr_unapproved,
@@ -17,14 +17,14 @@ _HANDLER_MAP = {
 
 
 def route(event_key: str, event_payload: dict) -> Optional[list]:
-    """Routes the given event and payload to the relevant decorator.
+    """Route event payload to the relevant event handlers.
 
     Returns:
         list: List of return values from the event receivers.
-        None: If no handler is available for the given event key.
+        None: If no hook is available for the given event key.
 
     """
-    handler = _HANDLER_MAP.get(event_key)
-    if not handler:
+    hook = _EVENT_HOOK_MAP.get(event_key)
+    if not hook:
         return None
-    return handler.handle(event_payload)
+    return hook.handle(event_payload)
