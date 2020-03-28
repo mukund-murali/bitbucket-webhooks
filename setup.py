@@ -25,7 +25,7 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     keywords="bitbucket webhooks development",
-    packages=find_namespace_packages(include=["bitbucket_webhooks_router"]),
+    packages=find_namespace_packages(include=["bitbucket_webhooks"]),
     python_requires=">=3.5",
     install_requires=["marshmallow-objects>=2.2.2", "marshmallow>=3.0.0"],
     extras_require={"dev": ["pytest", "black", "isort", "flake8", "mypy"]},

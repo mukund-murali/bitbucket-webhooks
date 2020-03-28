@@ -1,6 +1,6 @@
 from typing import Optional
 
-from bitbucket_webhooks_router import _handlers
+from bitbucket_webhooks import _handlers
 
 _HANDLER_MAP = {
     handler.event_key: handler for handler in _handlers.EventHandler.__subclasses__()

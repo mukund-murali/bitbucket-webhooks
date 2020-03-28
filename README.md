@@ -8,15 +8,15 @@ Python library that makes webhook API [event payloads](https://confluence.atlass
 ## Installation
 
 ```
-$ pip install bb-hooks-router
+$ pip install bitbucket-webhooks
 ```
 
 ## Quickstart
 
 ```python
-from bitbucket_webhooks_router import event_schemas
-from bitbucket_webhooks_router import hooks
-from bitbucket_webhooks_router import router
+from bitbucket_webhooks import event_schemas
+from bitbucket_webhooks import hooks
+from bitbucket_webhooks import router
 from flask import Flask
 from flask import request
 
@@ -53,4 +53,4 @@ def _handle_repo_push(event: event_schemas.RepoPush):
 
 ## Links
 
-[PyPI](https://pypi.org/project/bb-hooks-router/)
+[PyPI](https://pypi.org/project/bitbucket-webhooks/)

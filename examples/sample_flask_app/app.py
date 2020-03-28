@@ -1,6 +1,6 @@
-from bitbucket_webhooks_router import event_schemas
-from bitbucket_webhooks_router import hooks
-from bitbucket_webhooks_router import router
+from bitbucket_webhooks import event_schemas
+from bitbucket_webhooks import hooks
+from bitbucket_webhooks import router
 from flask import Flask
 from flask import request
 

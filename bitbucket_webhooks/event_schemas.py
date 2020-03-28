@@ -1,6 +1,6 @@
 import marshmallow_objects as mm
 
-from bitbucket_webhooks_router import base_schemas
+from bitbucket_webhooks import base_schemas
 
 
 class RepoPush(mm.Model):

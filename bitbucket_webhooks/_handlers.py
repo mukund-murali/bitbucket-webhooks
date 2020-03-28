@@ -3,8 +3,8 @@ from abc import abstractmethod
 
 import marshmallow_objects as mm
 
-from bitbucket_webhooks_router import event_schemas
-from bitbucket_webhooks_router import hooks
+from bitbucket_webhooks import event_schemas
+from bitbucket_webhooks import hooks
 
 
 class EventHandler(metaclass=ABCMeta):
