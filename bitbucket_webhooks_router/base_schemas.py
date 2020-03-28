@@ -2,10 +2,6 @@ import marshmallow_objects as mm
 
 
 class User(mm.Model):
-    """
-    https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-entity_user
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -17,9 +13,6 @@ class User(mm.Model):
 
 
 class Project(mm.Model):
-    """
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -29,9 +22,6 @@ class Project(mm.Model):
 
 
 class Repository(mm.Model):
-    """
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -68,9 +58,6 @@ class ChangeLocation(mm.Model):
 
 
 class PullRequest(mm.Model):
-    """
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -87,5 +74,31 @@ class PullRequest(mm.Model):
     reviewers = mm.fields.List(mm.NestedModel(User))
     closed_by = mm.NestedModel(User, allow_none=True)
     reason = mm.fields.String()
+    created_on = mm.fields.DateTime()
+    updated_on = mm.fields.DateTime()
+
+
+class CommentContent(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+    
+    raw = mm.fields.String()
+    markup = mm.fields.String()
+    html = mm.fields.String()
+
+
+class InlineComment(mm.Model):
+    to = mm.fields.Int()
+    from = mm.fields.Int(allow_none=True)
+    path = mm.fields.String()
+
+
+class Comment(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+    
+    id = mm.fields.Int()
+    parent = mm.fields.Int(allow_none=True)
+    content = mm.NestedModel(CommentContent)
     created_on = mm.fields.DateTime()
     updated_on = mm.fields.DateTime()

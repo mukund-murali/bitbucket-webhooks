@@ -64,3 +64,21 @@ class PullRequestDeclinedHandler(EventHandler):
     event_key = "pullrequest:rejected"
     schema = event_schemas.PullRequestDeclined
     decorator = hooks.pr_declined
+
+
+class PullRequestCommentCreatedHandler(EventHandler):
+    event_key = "pullrequest:comment_created"
+    schema = event_schemas.PullRequestCommentCreated
+    decorator = hooks.pr_comment_created
+
+
+class PullRequestCommentUpdatedHandler(EventHandler):
+    event_key = "pullrequest:comment_updated"
+    schema = event_schemas.PullRequestCommentUpdated
+    decorator = hooks.pr_comment_updated
+
+
+class PullRequestCommentDeletedHandler(EventHandler):
+    event_key = "pullrequest:comment_deleted"
+    schema = event_schemas.PullRequestCommentDeleted
+    decorator = hooks.pr_comment_deleted
