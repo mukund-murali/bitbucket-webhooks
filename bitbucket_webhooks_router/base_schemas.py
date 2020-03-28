@@ -81,7 +81,7 @@ class PullRequest(mm.Model):
 class CommentContent(mm.Model):
     class Meta:
         unknown = mm.EXCLUDE
-    
+
     raw = mm.fields.String()
     markup = mm.fields.String()
     html = mm.fields.String()
@@ -89,14 +89,14 @@ class CommentContent(mm.Model):
 
 class InlineComment(mm.Model):
     to = mm.fields.Int()
-    from = mm.fields.Int(allow_none=True)
+    from_id = mm.fields.Int(allow_none=True, attribute="from")
     path = mm.fields.String()
 
 
 class Comment(mm.Model):
     class Meta:
         unknown = mm.EXCLUDE
-    
+
     id = mm.fields.Int()
     parent = mm.fields.Int(allow_none=True)
     content = mm.NestedModel(CommentContent)
