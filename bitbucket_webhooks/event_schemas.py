@@ -1,27 +1,27 @@
-import marshmallow_objects as mm
+import marshmallow_objects as mo
 
 from bitbucket_webhooks import base_schemas
 
 
-class RepoPush(mm.Model):
+class RepoPush(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    actor = mm.NestedModel(base_schemas.User)
-    repository = mm.NestedModel(base_schemas.Repository)
+    actor = mo.NestedModel(base_schemas.User)
+    repository = mo.NestedModel(base_schemas.Repository)
 
 
 # Pull request events
 # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-Pullrequestevents
 
 
-class PullRequestCreated(mm.Model):
+class PullRequestCreated(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    actor = mm.NestedModel(base_schemas.User)
-    repository = mm.NestedModel(base_schemas.Repository)
-    pullrequest = mm.NestedModel(base_schemas.PullRequest)
+    actor = mo.NestedModel(base_schemas.User)
+    repository = mo.NestedModel(base_schemas.Repository)
+    pullrequest = mo.NestedModel(base_schemas.PullRequest)
 
 
 class PullRequestUpdated(PullRequestCreated):
@@ -36,30 +36,30 @@ class PullRequestDeclined(PullRequestCreated):
     pass
 
 
-class ApprovalInfo(mm.Model):
-    date = mm.fields.DateTime()
-    user = mm.NestedModel(base_schemas.User)
+class ApprovalInfo(mo.Model):
+    date = mo.fields.DateTime()
+    user = mo.NestedModel(base_schemas.User)
 
 
-class PullRequestApproved(mm.Model):
+class PullRequestApproved(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    actor = mm.NestedModel(base_schemas.User)
-    repository = mm.NestedModel(base_schemas.Repository)
-    pullrequest = mm.NestedModel(base_schemas.PullRequest)
-    approval = mm.NestedModel(ApprovalInfo)
+    actor = mo.NestedModel(base_schemas.User)
+    repository = mo.NestedModel(base_schemas.Repository)
+    pullrequest = mo.NestedModel(base_schemas.PullRequest)
+    approval = mo.NestedModel(ApprovalInfo)
 
 
 class PullRequestUnapproved(PullRequestApproved):
     pass
 
 
-class PullRequestCommentCreated(mm.Model):
-    actor = mm.NestedModel(base_schemas.User)
-    repository = mm.NestedModel(base_schemas.Repository)
-    pullrequest = mm.NestedModel(base_schemas.PullRequest)
-    comment = mm.NestedModel(base_schemas.Comment)
+class PullRequestCommentCreated(mo.Model):
+    actor = mo.NestedModel(base_schemas.User)
+    repository = mo.NestedModel(base_schemas.Repository)
+    pullrequest = mo.NestedModel(base_schemas.PullRequest)
+    comment = mo.NestedModel(base_schemas.Comment)
 
 
 class PullRequestCommentUpdated(PullRequestCommentCreated):
