@@ -1,128 +1,128 @@
-import marshmallow_objects as mm
+import marshmallow_objects as mo
 
 
-class User(mm.Model):
+class User(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    type = mm.fields.String()
-    username = mm.fields.String()
-    nickname = mm.fields.String()
-    display_name = mm.fields.String()
-    uuid = mm.fields.String()
+    type = mo.fields.String()
+    username = mo.fields.String()
+    nickname = mo.fields.String()
+    display_name = mo.fields.String()
+    uuid = mo.fields.String()
 
 
-class Project(mm.Model):
+class Project(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    name = mm.fields.String()
-    uuid = mm.fields.String()
-    key = mm.fields.String()
+    name = mo.fields.String()
+    uuid = mo.fields.String()
+    key = mo.fields.String()
 
 
-class Repository(mm.Model):
+class Repository(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    name = mm.fields.String()
-    full_name = mm.fields.String()
-    website = mm.fields.String(allow_none=True)
-    uuid = mm.fields.String()
-    owner = mm.NestedModel(User)
-    project = mm.NestedModel(Project)
-    is_private = mm.fields.Boolean()
+    name = mo.fields.String()
+    full_name = mo.fields.String()
+    website = mo.fields.String(allow_none=True)
+    uuid = mo.fields.String()
+    owner = mo.NestedModel(User)
+    project = mo.NestedModel(Project)
+    is_private = mo.fields.Boolean()
 
 
-class Branch(mm.Model):
+class Branch(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    name = mm.fields.String()
+    name = mo.fields.String()
 
 
-class Commit(mm.Model):
+class Commit(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    hash = mm.fields.String()
+    hash = mo.fields.String()
 
 
-class ChangeLocation(mm.Model):
+class ChangeLocation(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    repository = mm.NestedModel(Repository)
-    branch = mm.NestedModel(Branch)
-    commit = mm.NestedModel(Commit)
+    repository = mo.NestedModel(Repository)
+    branch = mo.NestedModel(Branch)
+    commit = mo.NestedModel(Commit)
 
 
-class Participant(mm.Model):
+class Participant(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    role = mm.fields.String()
-    participated_on = mm.fields.DateTime()
-    approved = mm.fields.Boolean()
-    user = mm.NestedModel(User)
+    role = mo.fields.String()
+    participated_on = mo.fields.DateTime()
+    approved = mo.fields.Boolean()
+    user = mo.NestedModel(User)
 
 
-class PullRequest(mm.Model):
+class PullRequest(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    id = mm.fields.Int()
-    title = mm.fields.String()
-    description = mm.fields.String()
+    id = mo.fields.Int()
+    title = mo.fields.String()
+    description = mo.fields.String()
     # TODO: Change this to enum.
-    state = mm.fields.String()
-    author = mm.NestedModel(User)
-    source = mm.NestedModel(ChangeLocation)
-    destination = mm.NestedModel(ChangeLocation)
-    merge_commit = mm.NestedModel(Commit, allow_none=True)
-    participants = mm.fields.List(mm.NestedModel(Participant))
-    reviewers = mm.fields.List(mm.NestedModel(User))
-    closed_by = mm.NestedModel(User, allow_none=True)
-    reason = mm.fields.String()
-    created_on = mm.fields.DateTime()
-    updated_on = mm.fields.DateTime()
-    comment_count = mm.fields.Int(allow_none=True)
-    task_count = mm.fields.Int(allow_none=True)
-    close_source_branch = mm.fields.Boolean(allow_none=True)
+    state = mo.fields.String()
+    author = mo.NestedModel(User)
+    source = mo.NestedModel(ChangeLocation)
+    destination = mo.NestedModel(ChangeLocation)
+    merge_commit = mo.NestedModel(Commit, allow_none=True)
+    participants = mo.fields.List(mo.NestedModel(Participant))
+    reviewers = mo.fields.List(mo.NestedModel(User))
+    closed_by = mo.NestedModel(User, allow_none=True)
+    reason = mo.fields.String()
+    created_on = mo.fields.DateTime()
+    updated_on = mo.fields.DateTime()
+    comment_count = mo.fields.Int(allow_none=True)
+    task_count = mo.fields.Int(allow_none=True)
+    close_source_branch = mo.fields.Boolean(allow_none=True)
 
 
-class CommentContent(mm.Model):
+class CommentContent(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    raw = mm.fields.String()
-    markup = mm.fields.String()
-    html = mm.fields.String()
+    raw = mo.fields.String()
+    markup = mo.fields.String()
+    html = mo.fields.String()
 
 
-class InlineComment(mm.Model):
+class InlineComment(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    to_line = mm.fields.Int(data_key="to")
-    from_line = mm.fields.Int(allow_none=True, data_key="from")
-    path = mm.fields.String()
+    to_line = mo.fields.Int(data_key="to")
+    from_line = mo.fields.Int(allow_none=True, data_key="from")
+    path = mo.fields.String()
 
 
-class ParentComment(mm.Model):
+class ParentComment(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    id = mm.fields.Int()
+    id = mo.fields.Int()
 
 
-class Comment(mm.Model):
+class Comment(mo.Model):
     class Meta:
-        unknown = mm.EXCLUDE
+        unknown = mo.EXCLUDE
 
-    id = mm.fields.Int()
-    parent = mm.NestedModel(ParentComment)
-    content = mm.NestedModel(CommentContent)
-    inline = mm.NestedModel(InlineComment)
-    created_on = mm.fields.DateTime()
-    updated_on = mm.fields.DateTime()
+    id = mo.fields.Int()
+    parent = mo.NestedModel(ParentComment)
+    content = mo.NestedModel(CommentContent)
+    inline = mo.NestedModel(InlineComment)
+    created_on = mo.fields.DateTime()
+    updated_on = mo.fields.DateTime()

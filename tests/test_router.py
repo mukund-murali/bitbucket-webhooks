@@ -13,7 +13,7 @@ def test_no_handler_available() -> None:
 
 
 def test_num_handlers() -> None:
-    assert len(router._HANDLER_MAP) == 10
+    assert len(router._EVENT_HOOK_MAP) == 10
 
 
 @hooks.repo_push
@@ -119,8 +119,26 @@ def test_pr_comment_created_router() -> None:
 def _pr_comment_updated_handler(event: event_schemas.PullRequestCommentUpdated) -> str:
     assert event.comment.content.raw == "New comment edited"
     assert event.comment.inline is None
-    assert event.comment.created_on == datetime.datetime(2020, 3, 28, 8, 13, 4, 293869, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
-    assert event.comment.updated_on == datetime.datetime(2020, 3, 28, 12, 1, 38, 182013, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
+    assert event.comment.created_on == datetime.datetime(
+        2020,
+        3,
+        28,
+        8,
+        13,
+        4,
+        293869,
+        tzinfo=datetime.timezone(datetime.timedelta(0), "+0000"),
+    )
+    assert event.comment.updated_on == datetime.datetime(
+        2020,
+        3,
+        28,
+        12,
+        1,
+        38,
+        182013,
+        tzinfo=datetime.timezone(datetime.timedelta(0), "+0000"),
+    )
     assert event.comment.parent.id == 142468018
     assert event.pullrequest.comment_count == 4
     return "pr_comment_updated"

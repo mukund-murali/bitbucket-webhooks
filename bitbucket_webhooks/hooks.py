@@ -1,26 +1,38 @@
 from typing import Callable
 from typing import List
 
+import marshmallow_objects as mo
 
-class BaseHandler:
-    def __init__(self) -> None:
+from bitbucket_webhooks import event_schemas
+
+
+class _BaseHook:
+    def __init__(self, schema: mo.Model) -> None:
         self.handlers: List[Callable] = []
+        self.schema = schema
 
     def __call__(self, method: Callable) -> Callable:
         self.handlers.append(method)
         return method
 
-    def get_methods(self) -> List[Callable]:
-        return self.handlers
+    def handle(self, event_payload: dict) -> list:
+        """Make function calls to all handlers registered with this hook.
+
+        Returns:
+            list: List of return values from the handlers.
+
+        """
+        event = self.schema().load(event_payload)
+        return [method(event) for method in self.handlers]
 
 
-repo_push = BaseHandler()
-pr_approved = BaseHandler()
-pr_unapproved = BaseHandler()
-pr_created = BaseHandler()
-pr_updated = BaseHandler()
-pr_merged = BaseHandler()
-pr_declined = BaseHandler()
-pr_comment_created = BaseHandler()
-pr_comment_updated = BaseHandler()
-pr_comment_deleted = BaseHandler()
+repo_push = _BaseHook(event_schemas.RepoPush)
+pr_approved = _BaseHook(event_schemas.PullRequestApproved)
+pr_unapproved = _BaseHook(event_schemas.PullRequestUnapproved)
+pr_created = _BaseHook(event_schemas.PullRequestCreated)
+pr_updated = _BaseHook(event_schemas.PullRequestUpdated)
+pr_merged = _BaseHook(event_schemas.PullRequestMerged)
+pr_declined = _BaseHook(event_schemas.PullRequestDeclined)
+pr_comment_created = _BaseHook(event_schemas.PullRequestCommentCreated)
+pr_comment_updated = _BaseHook(event_schemas.PullRequestCommentUpdated)
+pr_comment_deleted = _BaseHook(event_schemas.PullRequestCommentDeleted)
