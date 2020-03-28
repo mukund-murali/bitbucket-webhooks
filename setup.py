@@ -11,11 +11,11 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="bitbucket-webhooks",
-    version="0.0.7",
+    version="0.0.8",
     description="Routes bitbucket webhook API event payloads to easily consumable decorators with payload serialized to python objects.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/mukund-murali/bitbucket-webhooks-router",
+    url="https://github.com/mukund-murali/bitbucket-webhooks",
     author="Mukund Muralikrishnan",
     author_email="mukund.muralikrishnan@gmail.com",
     classifiers=[
@@ -30,7 +30,7 @@ setup(
     install_requires=["marshmallow-objects>=2.2.2", "marshmallow>=3.0.0"],
     extras_require={"dev": ["pytest", "black", "isort", "flake8", "mypy"]},
     project_urls={
-        "Bug Reports": "https://github.com/mukund-murali/bitbucket-webhooks-router/issues",
-        "Source": "https://github.com/mukund-murali/bitbucket-webhooks-router",
+        "Bug Reports": "https://github.com/mukund-murali/bitbucket-webhooks/issues",
+        "Source": "https://github.com/mukund-murali/bitbucket-webhooks",
     },
 )

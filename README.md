@@ -1,6 +1,6 @@
 # bitbucket-webhooks
  
-[![Build Status](https://travis-ci.com/mukund-murali/bitbucket-webhooks-router.svg?branch=master)](https://travis-ci.com/mukund-murali/bitbucket-webhooks-router)
+[![Build Status](https://travis-ci.com/mukund-murali/bitbucket-webhooks.svg?branch=master)](https://travis-ci.com/mukund-murali/bitbucket-webhooks)
 
 Python library that makes webhook API [event payloads](https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html) available via decorators with payload serialized into python objects.
 
@@ -34,7 +34,7 @@ def _handle_repo_push(event: event_schemas.RepoPush):
     print(f"One or more commits pushed to: {event.repository.name}"
 ```
 
-[Here](https://github.com/mukund-murali/bitbucket-webhooks-router/tree/master/examples/sample_flask_app) is the full example.
+[Here](https://github.com/mukund-murali/bitbucket-webhooks/tree/master/examples/sample_flask_app) is the full example.
 
 
 ## Bitbucket events supported
