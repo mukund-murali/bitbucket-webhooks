@@ -53,3 +53,23 @@ def _handle_pr_merged(event: event_schemas.PullRequestMerged):
 @hooks.pr_declined
 def _handle_pr_declined(event: event_schemas.PullRequestDeclined):
     print(f"Pull request #{event.pullrequest.id} declined")
+
+
+@hooks.pr_comment_created
+def _handle_pr_comment_created(event: event_schemas.PullRequestCommentCreated):
+    print(f"New comment in PR #{event.pullrequest.id}")
+    print(event.comment.content.raw)
+
+
+@hooks.pr_comment_updated
+def _handle_pr_comment_updated(event: event_schemas.PullRequestCommentUpdated):
+    print(f"Comment updated in PR #{event.pullrequest.id}")
+    print("Updated content:")
+    print(event.comment.content.raw)
+
+
+@hooks.pr_comment_deleted
+def _handle_pr_comment_deleted(event: event_schemas.PullRequestCommentDeleted):
+    print(f"Comment deleted in PR #{event.pullrequest.id}")
+    print("Deleted content:")
+    print(event.comment.content.raw)

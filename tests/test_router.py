@@ -85,3 +85,18 @@ def test_pr_merged_router() -> None:
     with open("tests/sample_data/pull_request_merged.json") as f:
         data = json.load(f)
     assert router.route("pullrequest:fulfilled", data) == ["pr_merged"]
+
+
+@hooks.pr_comment_created
+def _pr_comment_created_handler(event: event_schemas.PullRequestCommentCreated) -> str:
+    assert event.comment.content.raw == "New inline comment"
+    assert event.comment.inline.path == "test.txt"
+    assert event.comment.inline.to_line == 23
+    assert event.comment.inline.from_line == 21
+    return "pr_comment_created"
+
+
+def test_pr_comment_created_router() -> None:
+    with open("tests/sample_data/pr_comment_created.json") as f:
+        data = json.load(f)
+    assert router.route("pullrequest:comment_created", data) == ["pr_comment_created"]

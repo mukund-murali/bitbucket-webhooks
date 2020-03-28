@@ -88,8 +88,11 @@ class CommentContent(mm.Model):
 
 
 class InlineComment(mm.Model):
-    to = mm.fields.Int()
-    from_id = mm.fields.Int(allow_none=True, attribute="from")
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    to_line = mm.fields.Int(data_key="to")
+    from_line = mm.fields.Int(allow_none=True, data_key="from")
     path = mm.fields.String()
 
 
@@ -100,5 +103,6 @@ class Comment(mm.Model):
     id = mm.fields.Int()
     parent = mm.fields.Int(allow_none=True)
     content = mm.NestedModel(CommentContent)
+    inline = mm.NestedModel(InlineComment)
     created_on = mm.fields.DateTime()
     updated_on = mm.fields.DateTime()
