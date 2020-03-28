@@ -13,7 +13,7 @@ def test_no_handler_available() -> None:
 
 
 def test_num_handlers() -> None:
-    assert len(router._HANDLER_MAP) == 10
+    assert len(router._EVENT_HOOK_MAP) == 10
 
 
 @hooks.repo_push
