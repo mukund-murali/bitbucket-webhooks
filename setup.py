@@ -11,7 +11,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="bitbucket-webhooks",
-    version="0.0.9",
+    version="0.0.10",
     description="Routes bitbucket webhook API event payloads to consumable decorators with payload serialized to python objects.",
     long_description=long_description,
     long_description_content_type="text/markdown",
