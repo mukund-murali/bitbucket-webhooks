@@ -14,10 +14,10 @@ class BaseHandler:
         return self.handlers
 
 
-handle_repo_push = BaseHandler()
-handle_pr_approved = BaseHandler()
-handle_pr_unapproved = BaseHandler()
-handle_pr_created = BaseHandler()
-handle_pr_updated = BaseHandler()
-handle_pr_merged = BaseHandler()
-handle_pr_declined = BaseHandler()
+repo_push = BaseHandler()
+pr_approved = BaseHandler()
+pr_unapproved = BaseHandler()
+pr_created = BaseHandler()
+pr_updated = BaseHandler()
+pr_merged = BaseHandler()
+pr_declined = BaseHandler()
