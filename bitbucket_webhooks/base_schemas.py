@@ -2,10 +2,6 @@ import marshmallow_objects as mm
 
 
 class User(mm.Model):
-    """
-    https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html#EventPayloads-entity_user
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -17,9 +13,6 @@ class User(mm.Model):
 
 
 class Project(mm.Model):
-    """
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -29,9 +22,6 @@ class Project(mm.Model):
 
 
 class Repository(mm.Model):
-    """
-    """
-
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -67,10 +57,17 @@ class ChangeLocation(mm.Model):
     commit = mm.NestedModel(Commit)
 
 
-class PullRequest(mm.Model):
-    """
-    """
+class Participant(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
 
+    role = mm.fields.String()
+    participated_on = mm.fields.DateTime()
+    approved = mm.fields.Boolean()
+    user = mm.NestedModel(User)
+
+
+class PullRequest(mm.Model):
     class Meta:
         unknown = mm.EXCLUDE
 
@@ -83,9 +80,49 @@ class PullRequest(mm.Model):
     source = mm.NestedModel(ChangeLocation)
     destination = mm.NestedModel(ChangeLocation)
     merge_commit = mm.NestedModel(Commit, allow_none=True)
-    participants = mm.fields.List(mm.NestedModel(User))
+    participants = mm.fields.List(mm.NestedModel(Participant))
     reviewers = mm.fields.List(mm.NestedModel(User))
     closed_by = mm.NestedModel(User, allow_none=True)
     reason = mm.fields.String()
+    created_on = mm.fields.DateTime()
+    updated_on = mm.fields.DateTime()
+    comment_count = mm.fields.Int(allow_none=True)
+    task_count = mm.fields.Int(allow_none=True)
+    close_source_branch = mm.fields.Boolean(allow_none=True)
+
+
+class CommentContent(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    raw = mm.fields.String()
+    markup = mm.fields.String()
+    html = mm.fields.String()
+
+
+class InlineComment(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    to_line = mm.fields.Int(data_key="to")
+    from_line = mm.fields.Int(allow_none=True, data_key="from")
+    path = mm.fields.String()
+
+
+class ParentComment(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    id = mm.fields.Int()
+
+
+class Comment(mm.Model):
+    class Meta:
+        unknown = mm.EXCLUDE
+
+    id = mm.fields.Int()
+    parent = mm.NestedModel(ParentComment)
+    content = mm.NestedModel(CommentContent)
+    inline = mm.NestedModel(InlineComment)
     created_on = mm.fields.DateTime()
     updated_on = mm.fields.DateTime()

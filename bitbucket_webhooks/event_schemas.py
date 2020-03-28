@@ -1,11 +1,6 @@
 import marshmallow_objects as mm
 
-from bitbucket_webhooks_router import base_schemas
-
-
-class ApprovalInfo(mm.Model):
-    date = mm.fields.DateTime()
-    user = mm.NestedModel(base_schemas.User)
+from bitbucket_webhooks import base_schemas
 
 
 class RepoPush(mm.Model):
@@ -41,6 +36,11 @@ class PullRequestDeclined(PullRequestCreated):
     pass
 
 
+class ApprovalInfo(mm.Model):
+    date = mm.fields.DateTime()
+    user = mm.NestedModel(base_schemas.User)
+
+
 class PullRequestApproved(mm.Model):
     class Meta:
         unknown = mm.EXCLUDE
@@ -52,4 +52,19 @@ class PullRequestApproved(mm.Model):
 
 
 class PullRequestUnapproved(PullRequestApproved):
+    pass
+
+
+class PullRequestCommentCreated(mm.Model):
+    actor = mm.NestedModel(base_schemas.User)
+    repository = mm.NestedModel(base_schemas.Repository)
+    pullrequest = mm.NestedModel(base_schemas.PullRequest)
+    comment = mm.NestedModel(base_schemas.Comment)
+
+
+class PullRequestCommentUpdated(PullRequestCommentCreated):
+    pass
+
+
+class PullRequestCommentDeleted(PullRequestCommentCreated):
     pass

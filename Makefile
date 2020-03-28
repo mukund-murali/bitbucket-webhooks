@@ -1,8 +1,8 @@
 test:
-	black --check --diff bitbucket_webhooks_router
-	isort --check-only -rc bitbucket_webhooks_router
-	mypy bitbucket_webhooks_router tests
-	flake8 bitbucket_webhooks_router
+	black --check --diff bitbucket_webhooks
+	isort --check-only -rc bitbucket_webhooks
+	mypy bitbucket_webhooks tests
+	flake8 bitbucket_webhooks
 	pytest
 
 fmt:

@@ -3,8 +3,8 @@ from abc import abstractmethod
 
 import marshmallow_objects as mm
 
-from bitbucket_webhooks_router import event_schemas
-from bitbucket_webhooks_router import hooks
+from bitbucket_webhooks import event_schemas
+from bitbucket_webhooks import hooks
 
 
 class EventHandler(metaclass=ABCMeta):
@@ -64,3 +64,21 @@ class PullRequestDeclinedHandler(EventHandler):
     event_key = "pullrequest:rejected"
     schema = event_schemas.PullRequestDeclined
     decorator = hooks.pr_declined
+
+
+class PullRequestCommentCreatedHandler(EventHandler):
+    event_key = "pullrequest:comment_created"
+    schema = event_schemas.PullRequestCommentCreated
+    decorator = hooks.pr_comment_created
+
+
+class PullRequestCommentUpdatedHandler(EventHandler):
+    event_key = "pullrequest:comment_updated"
+    schema = event_schemas.PullRequestCommentUpdated
+    decorator = hooks.pr_comment_updated
+
+
+class PullRequestCommentDeletedHandler(EventHandler):
+    event_key = "pullrequest:comment_deleted"
+    schema = event_schemas.PullRequestCommentDeleted
+    decorator = hooks.pr_comment_deleted
