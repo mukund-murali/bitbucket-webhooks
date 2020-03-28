@@ -1,4 +1,4 @@
-# bitbucket-webhooks-router
+# bitbucket-webhooks
  
 [![Build Status](https://travis-ci.com/mukund-murali/bitbucket-webhooks-router.svg?branch=master)](https://travis-ci.com/mukund-murali/bitbucket-webhooks-router)
 
