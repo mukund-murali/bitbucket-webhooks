@@ -122,10 +122,22 @@ def _pr_comment_updated_handler(event: event_schemas.PullRequestCommentUpdated) 
     assert event.comment.created_on == datetime.datetime(2020, 3, 28, 8, 13, 4, 293869, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
     assert event.comment.updated_on == datetime.datetime(2020, 3, 28, 12, 1, 38, 182013, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
     assert event.comment.parent.id == 142468018
+    assert event.pullrequest.comment_count == 4
     return "pr_comment_updated"
 
 
 def test_pr_comment_updated_router() -> None:
     with open("tests/sample_data/pr_comment_updated.json") as f:
         data = json.load(f)
-    assert router.route("pullrequest:comment_updated", data) == ["pr_comment_updated"]
+
+
+@hooks.pr_comment_deleted
+def _pr_comment_deleted_handler(event: event_schemas.PullRequestCommentDeleted) -> str:
+    assert event.comment.content.raw == ""
+    return "pr_comment_deleted"
+
+
+def test_pr_comment_deleted_router() -> None:
+    with open("tests/sample_data/pr_comment_deleted.json") as f:
+        data = json.load(f)
+    assert router.route("pullrequest:comment_deleted", data) == ["pr_comment_deleted"]
