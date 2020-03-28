@@ -1,50 +1,23 @@
-from collections import defaultdict
 from typing import Callable
-from typing import Dict
 from typing import List
 
 
-class BaseHandler(object):
-    _cls_methods_map: Dict[str, List[Callable]] = defaultdict(list)
+class BaseHandler:
+    def __init__(self) -> None:
+        self.handlers: List[Callable] = []
 
-    def __init__(self, method: Callable) -> None:
-        BaseHandler._cls_methods_map[type(self).__name__].append(method)
+    def __call__(self, method: Callable) -> Callable:
+        self.handlers.append(method)
+        return method
 
-    @classmethod
-    def get_methods(cls) -> List[Callable]:
-        return BaseHandler._cls_methods_map[cls.__name__]
-
-
-class handle_repo_push(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_repo_push, self).__init__(method)
+    def get_methods(self) -> List[Callable]:
+        return self.handlers
 
 
-class handle_pr_approved(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_pr_approved, self).__init__(method)
-
-
-class handle_pr_unapproved(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_pr_unapproved, self).__init__(method)
-
-
-class handle_pr_created(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_pr_created, self).__init__(method)
-
-
-class handle_pr_updated(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_pr_updated, self).__init__(method)
-
-
-class handle_pr_merged(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_pr_merged, self).__init__(method)
-
-
-class handle_pr_declined(BaseHandler):
-    def __init__(self, method: Callable) -> None:
-        super(handle_pr_declined, self).__init__(method)
+handle_repo_push = BaseHandler()
+handle_pr_approved = BaseHandler()
+handle_pr_unapproved = BaseHandler()
+handle_pr_created = BaseHandler()
+handle_pr_updated = BaseHandler()
+handle_pr_merged = BaseHandler()
+handle_pr_declined = BaseHandler()

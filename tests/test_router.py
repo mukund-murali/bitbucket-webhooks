@@ -17,15 +17,21 @@ def test_num_handlers() -> None:
 
 
 @decorators.handle_repo_push
-def _repo_push_handler(event: event_schemas.RepoPush) -> str:
+def _repo_push_handler_1(event: event_schemas.RepoPush) -> str:
     assert event.repository.name == "webhook-test-project"
-    return "repo_pushed"
+    return "repo_pushed_1"
+
+
+@decorators.handle_repo_push
+def _repo_push_handler_2(event: event_schemas.RepoPush) -> str:
+    assert event.repository.name == "webhook-test-project"
+    return "repo_pushed_2"
 
 
 def test_repo_push_router() -> None:
     with open("tests/sample_data/repo_push.json") as f:
         data = json.load(f)
-    assert router.route("repo:push", data) == ["repo_pushed"]
+    assert router.route("repo:push", data) == ["repo_pushed_1", "repo_pushed_2"]
 
 
 @decorators.handle_pr_created
