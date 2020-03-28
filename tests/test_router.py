@@ -51,19 +51,32 @@ def test_pr_created_router() -> None:
 
 @hooks.pr_approved
 def _pr_approved_handler(event: event_schemas.PullRequestApproved) -> str:
-    assert event.approval.user.display_name == "Mukund Muralikrishnan"
+    assert event.approval.user.display_name == "user2"
     assert event.approval.date == datetime.datetime(
         2020,
         3,
+        28,
+        12,
         27,
-        21,
-        5,
-        8,
-        156574,
+        1,
+        368921,
         tzinfo=datetime.timezone(datetime.timedelta(0), "+0000"),
     )
     assert event.pullrequest.closed_by is None
     assert event.pullrequest.state == "OPEN"
+    assert event.pullrequest.author.nickname == "mukundvis"
+    assert event.repository.owner.nickname == "mukundvis"
+    assert len(event.pullrequest.reviewers) == 1
+    assert event.pullrequest.reviewers[0].nickname == "user2"
+    assert len(event.pullrequest.participants) == 2
+    participant_1 = event.pullrequest.participants[0]
+    assert participant_1.role == "REVIEWER"
+    assert participant_1.approved is True
+    assert participant_1.user.nickname == "user2"
+    participant_1 = event.pullrequest.participants[1]
+    assert participant_1.role == "PARTICIPANT"
+    assert participant_1.approved is False
+    assert participant_1.user.nickname == "mukundvis"
     return "pr_approved"
 
 
@@ -100,3 +113,19 @@ def test_pr_comment_created_router() -> None:
     with open("tests/sample_data/pr_comment_created.json") as f:
         data = json.load(f)
     assert router.route("pullrequest:comment_created", data) == ["pr_comment_created"]
+
+
+@hooks.pr_comment_updated
+def _pr_comment_updated_handler(event: event_schemas.PullRequestCommentUpdated) -> str:
+    assert event.comment.content.raw == "New comment edited"
+    assert event.comment.inline is None
+    assert event.comment.created_on == datetime.datetime(2020, 3, 28, 8, 13, 4, 293869, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
+    assert event.comment.updated_on == datetime.datetime(2020, 3, 28, 12, 1, 38, 182013, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
+    assert event.comment.parent.id == 142468018
+    return "pr_comment_updated"
+
+
+def test_pr_comment_updated_router() -> None:
+    with open("tests/sample_data/pr_comment_updated.json") as f:
+        data = json.load(f)
+    assert router.route("pullrequest:comment_updated", data) == ["pr_comment_updated"]
