@@ -1,3 +1,4 @@
+"""Schemas that the decorators would be called with."""
 import marshmallow_objects as mo
 
 from bitbucket_webhooks import base_schemas
