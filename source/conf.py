@@ -24,6 +24,7 @@ author = "Mukund Muralikrishnan"
 # The full version, including alpha/beta/rc tags
 release = "v0.0.10"
 
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
