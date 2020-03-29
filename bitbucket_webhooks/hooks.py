@@ -1,3 +1,8 @@
+"""Decorators that have to be extended by the hook handlers.
+
+.. module:: hooks
+
+"""
 from typing import Callable
 from typing import List
 
@@ -7,6 +12,8 @@ from bitbucket_webhooks import event_schemas
 
 
 class _BaseHook:
+    """The base hook that creates the decorators."""
+
     def __init__(self, schema: mo.Model) -> None:
         self.handlers: List[Callable] = []
         self.schema = schema
@@ -27,6 +34,11 @@ class _BaseHook:
 
 
 repo_push = _BaseHook(event_schemas.RepoPush)
+"""
+Decorator for repo:push events with the first argument as
+:class:`bitbucket_webhooks.event_schemas.RepoPush`
+"""
+
 pr_approved = _BaseHook(event_schemas.PullRequestApproved)
 pr_unapproved = _BaseHook(event_schemas.PullRequestUnapproved)
 pr_created = _BaseHook(event_schemas.PullRequestCreated)
