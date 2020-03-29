@@ -1,2 +1,2 @@
--e ../../
+bitbucket-webhooks
 Flask
