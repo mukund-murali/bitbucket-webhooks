@@ -49,8 +49,3 @@ def _handle_repo_push(event: event_schemas.RepoPush):
 * pullrequest:comment_created
 * pullrequest:comment_updated
 * pullrequest:comment_deleted
-
-
-## Links
-
-[PyPI](https://pypi.org/project/bitbucket-webhooks/)
