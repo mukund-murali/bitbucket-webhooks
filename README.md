@@ -14,11 +14,12 @@ $ pip install bitbucket-webhooks
 ## Quickstart
 
 ```python
+from flask import Flask
+from flask import request
+
 from bitbucket_webhooks import event_schemas
 from bitbucket_webhooks import hooks
 from bitbucket_webhooks import router
-from flask import Flask
-from flask import request
 
 app = Flask(__name__)
 
