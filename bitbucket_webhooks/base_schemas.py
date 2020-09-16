@@ -41,7 +41,7 @@ class Branch(mo.Model):
     name = mo.fields.String()
 
 
-class Commit(mo.Model):
+class CommitHash(mo.Model):
     class Meta:
         unknown = mo.EXCLUDE
 
@@ -54,7 +54,7 @@ class ChangeLocation(mo.Model):
 
     repository = mo.NestedModel(Repository)
     branch = mo.NestedModel(Branch)
-    commit = mo.NestedModel(Commit)
+    commit = mo.NestedModel(CommitHash)
 
 
 class Participant(mo.Model):
@@ -79,7 +79,7 @@ class PullRequest(mo.Model):
     author = mo.NestedModel(User)
     source = mo.NestedModel(ChangeLocation)
     destination = mo.NestedModel(ChangeLocation)
-    merge_commit = mo.NestedModel(Commit, allow_none=True)
+    merge_commit = mo.NestedModel(CommitHash, allow_none=True)
     participants = mo.fields.List(mo.NestedModel(Participant))
     reviewers = mo.fields.List(mo.NestedModel(User))
     closed_by = mo.NestedModel(User, allow_none=True)
@@ -126,3 +126,23 @@ class Comment(mo.Model):
     inline = mo.NestedModel(InlineComment)
     created_on = mo.fields.DateTime()
     updated_on = mo.fields.DateTime()
+
+
+class RepoPushChange(mo.Model):
+    class Meta:
+        unknown = mo.EXCLUDE
+
+    new = mo.fields.Dict()
+    old = mo.fields.Dict()
+    links = mo.fields.Dict()
+    created = mo.fields.Bool()
+    forced = mo.fields.Bool()
+    closed = mo.fields.Bool()
+    commits = mo.fields.List(mo.fields.Dict())
+
+
+class RepoPushData(mo.Model):
+    class Meta:
+        unknown = mo.EXCLUDE
+
+    changes = mo.fields.List(mo.NestedModel(RepoPushChange))

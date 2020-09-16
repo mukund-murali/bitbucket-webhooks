@@ -10,6 +10,7 @@ class RepoPush(mo.Model):
 
     actor = mo.NestedModel(base_schemas.User)
     repository = mo.NestedModel(base_schemas.Repository)
+    push = mo.NestedModel(base_schemas.RepoPushData)
 
 
 # Pull request events

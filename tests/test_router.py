@@ -19,6 +19,9 @@ def test_num_handlers() -> None:
 @hooks.repo_push
 def _repo_push_handler_1(event: event_schemas.RepoPush) -> str:
     assert event.repository.name == "webhook-test-project"
+    change = event.push.changes[0]
+    assert change.new["name"] == "test-branch"
+    assert change.commits[0]["message"] == "Add new line\n"
     return "repo_pushed_1"
 
 
